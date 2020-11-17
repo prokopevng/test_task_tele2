@@ -23,7 +23,16 @@ public class Z10 {
 		thread2.start();	//Запуск потока
 		
 		// Ожидание окончания потоков
-		while(thread1.isAlive() || thread2.isAlive());
+		if (thread1.isAlive()) {
+			try {
+				thread1.join();
+			} catch (InterruptedException e) {System.out.println(e);}
+		}
+		if (thread2.isAlive()) {
+			try {
+				thread2.join();
+			} catch (InterruptedException e) {System.out.println(e);}
+		}
 		
 		double result = first_factor * second_factor;
 		System.out.println("Result of (3 + 2) * (6 + 4): " + result);
